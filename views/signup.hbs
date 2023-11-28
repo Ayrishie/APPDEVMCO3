@@ -1,0 +1,76 @@
+<div class="overlay"></div>
+<div class="logo-container">
+    <span class="logo"></span>
+    <span>LABIFY</span>
+</div>
+<div class="wrapper">
+    <div class="form-container">
+        <div class="form-top">
+            <p><a href="/login">Log in</a> or <a href="/signup">sign up</a></p>
+        </div>
+        <div class="form-header">
+            <p>Welcome to Labify</p>
+        </div>
+        <form method="POST">
+            <div>
+                <input class="form-round-input" type="text" placeholder="DLSU email" name="email" required>
+                <!--<p class="error-email">Please enter a DLSU email (email@dlsu.edu.ph).</p>-->
+                <input class="form-round-input" type="password" placeholder="Password" name="password" required>
+                <!--<p class="error-password">Please enter at least 8 characters.</p>-->
+                <p class="error">{{error}}</p>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" name="isTechnician">
+                    Laboratory Technician
+                </label>
+            </div>
+            <div>
+                <input class="form-round-input" type="submit" value="Sign up">
+                <a href="/login"><input class="form-round-input" type="button" value="Log in"></a>
+            </div>
+        </form>
+        <div class="form-bottom">
+            <p>Labify Version 1.0</p>
+        </div>
+    </div>
+</div>
+<!--
+<div class="overlay"></div>
+<div class="logo-container">
+    <span class="logo"></span>
+    <span>LABIFY</span>
+</div>
+<div class="wrapper">
+    <div class="form-container">
+        <div class="form-top">
+            <p><a href="/login">Log in</a> or <a href="/signup">sign up</a></p>
+        </div>
+        <div class="form-header">
+            <p>Welcome to Labify</p>
+        </div>
+        <form method="POST" action="/signup">
+            <div>
+                <input class="form-round-input" type="text" placeholder="DLSU email" name="email" required>
+                <p class="error-email">Please enter a DLSU email (email@dlsu.edu.ph).</p>
+                <input class="form-round-input" type="password" placeholder="Password" name="password" required>
+                <p class="error-password">Please enter at least 8 characters.</p>
+                <p class="error">{{error}}</p>
+            </div>
+            <div>
+                <select name="accountType" required>
+                    <option value="student">Student</option>
+                    <option value="technician">Laboratory Technician</option>
+                </select>
+            </div>
+            <div>
+                <input class="form-round-input" type="submit" value="Sign up">
+                <a class="form-round-input" href="/login">Log in</a>
+            </div>
+        </form>
+        <div class="form-bottom">
+            <p>Labify Version 1.0</p>
+        </div>
+    </div>
+</div>
+-->

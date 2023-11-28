@@ -1,0 +1,55 @@
+{{#if result}}
+    <!-- Cover Photo -->
+    <div class="cover-photo">
+        <!-- Half of the profile photo is on top of the cover -->
+        <div class="profile-image-overlay">
+            <img src="{{result.profilePicture}}" alt="User Profile">
+        </div>
+    </div>
+
+    <!-- Profile Update Form -->
+    <form id="profile-update-form" method="POST" action="/profile/update" enctype="multipart/form-data">
+        <!-- Main Container -->
+        <div class="main-container">
+            <!-- Profile Container above the Reservations -->
+            <div class="profile-content">
+                <div class="profile-info">
+                    <!-- Profile Image inside the profile content div -->
+                    <div class="profile-image">
+                        <img src="{{result.profilePicture}}" alt="User Profile">
+                    </div>
+                    <!-- Profile Details -->
+                    <div class="profile-details">
+                        <h1>{{result.email}}</h1>
+                        <p id="user-description">{{result.description}}</p>
+                        <textarea id="edit-description" name="description" style="display:none;">{{result.description}}</textarea>
+                        {{#if isOwnProfile}}
+                            <!-- Profile Update Buttons -->
+                            <input type="file" id="profile-picture-upload" name="profilePicture">
+                            <button type="button" id="edit-description-button" class="custom-button">Edit Description</button>
+                            <button type="submit" id="save-description-button" style="display:none;" class="custom-button">Save Changes</button>
+                            <button type="button" class="delete-button custom-button">Delete Account</button>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reservations and other content -->
+            <div class="reservations-container">
+                <p>Reservations:</p>
+                {{#each reservations}}
+                    <div class="reservation-item">
+                        <p>Seat Reserved: Seat {{this.seatID}}</p>
+                        <p>Reservation Date: {{this.reservationDate}}</p>
+                        <p>Reservation Time: {{this.reservationTime}}</p>
+                        <br>
+                    </div>
+                {{else}}
+                    <p>This user has not made any reservations.</p>
+                {{/each}}
+            </div>
+        </div>
+    </form>
+{{else}}
+    <p>{{error}}</p>
+{{/if}}

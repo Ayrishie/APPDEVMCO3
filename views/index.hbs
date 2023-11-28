@@ -1,0 +1,185 @@
+<div class="buildings-container">
+    <div class="row">
+        {{#each buildings}}
+            <div class="image-container">
+                <img src="/img/lab-1.jpg">
+                <div class="image-text">
+                    <div class="text-content">
+                        <div class="building-name">{{this.buildingName}}</div>
+                        <a href="/reservation/{{this.buildingID}}" class="reserve-button"><span>Reserve</span></a>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>
+
+<!--
+<div class="dashboard-toggle">
+    <button class="toggle-button" id="toggleDashboardButton">Toggle Dashboard</button>
+</div>
+
+<div class="dashboard-nav-container">
+    <nav class="dashboard-nav">
+        <button class="filter-button" data-building="Gokongwei Hall">Gokongwei Hall</button>
+        <button class="filter-button" data-building="St.La Salle Hall">St.La Salle Hall</button>
+        <button class="filter-button" data-building="Br. Andrew Gonzalez Hall">Br. Andrew Gonzalez Hall</button>
+        <button class="filter-button" data-building="Henry Sy">Henry Sy</button>
+        <button class="filter-button" data-building="Velasco Hall">Velasco Hall</button>
+        <button class="filter-button" data-building="St.Miguel Hall">St.Miguel Hall</button>
+        <button class="filter-button" data-building="St.Muten Marie Hall">St.Muten Marie Hall</button>
+        <button class="filter-button" data-building="St. Joseph Hall">St. Joseph Hall</button>
+        <button class="filter-button" data-building="Enrique Yuchengco Hall">Enrique Yuchengco Hall</button>
+        <button class="filter-button all-button" data-building="All">Show All</button>
+    </nav>
+</div>
+
+<div class="Labratory" id="dashboard">
+    <div class="row">
+        <div class="image-container" data-building="Gokongwei Hall">
+            <img src="img/lab-1.jpg" alt="Lab 1">
+            <div class="image-text">
+                <div class="text-content">
+                    <div>Gokongwei Hall</div>
+                    <div class="text-spacer">Available seats</div>
+                    <a href="/reservation/gokongwei-hall" class="reserve-button"><span>Reserve</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="image-container" data-building="St. La Salle Hall">
+            <img src="img/lab-1.jpg" alt="Lab 2">
+            <div class="image-text">
+                <div class="text-content">
+                    <div>St. La Salle Hall</div>
+                    <div class="text-spacer">Available seats</div>
+                    <a href="st-lasalle-hall.html" class="reserve-button"><span>Reserve</span></a></div>
+            </div>
+        </div>
+        <div class="image-container" data-building="Br. Andrew Gonzalez Hall">
+            <img src="img/lab-1.jpg" alt="Lab 3">
+            <div class="image-text">
+                <div class="text-content">
+                    <div>Br. Andrew Gonzalez Hall</div>
+                    <div class="text-spacer">Available seats</div>
+                    <a href="br-andrew-hall.html" class="reserve-button"><span>Reserve</span></a></div>
+            </div>
+        </div>
+        <div class="image-container" data-building="Henry Sy">
+            <img src="img/lab-1.jpg" alt="Lab 1">
+            <div class="image-text">
+                <div class="text-content">
+                    <div>Henry Sy</div>
+                    <div class="text-spacer">Available seats</div>
+                    <a href="henry-sy.html" class="reserve-button"><span>Reserve</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="image-container" data-building="Enrique Yuchengco Hall">
+            <img src="img/lab-2.jpeg" alt="Lab 2">
+            <div class="image-text">
+                <div class="text-content">
+                    <div>Enrique Yuchengco Hall</div>
+                    <div class="text-spacer">Available seats</div>
+                    <a href="yuchengco-hall.html" class="reserve-button"><span>Reserve</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="image-container" data-building="St. Joseph Hall">
+            <img src="img/LAB3.jpeg" alt="Lab 3">
+            <div class="image-text">
+                <div class="text-content">
+                    <div>St. Joseph Hall</div>
+                    <div class="text-spacer">Available seats</div>
+                    <a href="st-joseph-hall.html" class="reserve-button"><span>Reserve</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="image-container" data-building="Velasco Hall">
+            <img src="img/LAB3.jpeg" alt="Lab 3">
+            <div class="image-text">
+                <div class="text-content">
+                    <div>Velasco Hall</div>
+                    <div class="text-spacer">Available seats</div>
+                    <a href="velasco-hall.html" class="reserve-button"><span>Reserve</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="image-container" data-building="St.Miguel Hall">
+            <img src="img/LAB3.jpeg" alt="Lab 3">
+            <div class="image-text">
+                <div class="text-content">
+                    <div>St. Miguel Hall</div>
+                    <div class="text-spacer">Available seats</div>
+                    <a href="st-miguel-hall.html" class="reserve-button"><span>Reserve</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="image-container" data-building="St. Muten Marie Hall">
+            <img src="img/LAB3.jpeg" alt="Lab 3">
+            <div class="image-text">
+                <div class="text-content">
+                    <div>St. Muten Marie Hall</div>
+                    <div class="text-spacer">Available seats</div>
+                    <a href="st-muten-hall.html" class="reserve-button"><span>Reserve</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showContent() {
+        const dashboard = document.querySelector('.Labratory');
+        const content = document.querySelector('.content');
+
+        if (content.style.display === 'none' || content.style.display === '') {
+            content.style.display = 'block';
+            dashboard.style.display = 'none';
+        } else {
+            content.style.display = 'none';
+            dashboard.style.display = 'block';
+        }
+    }
+</script>
+
+<script>
+    function redirectToReservationPage() {
+        window.location.href = "reservationpage.html";
+    }
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const filterButtons = document.querySelectorAll('.filter-button');
+        const imageContainers = document.querySelectorAll('.image-container');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                const selectedBuilding = this.getAttribute('data-building');
+
+                imageContainers.forEach(container => {
+                    const buildingName = container.getAttribute('data-building');
+                    if (selectedBuilding === 'All' || buildingName === selectedBuilding) {
+                        container.style.display = '';
+                    } else {
+                        container.style.display = 'none';
+                    }
+                });
+            });
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const toggleButton = document.getElementById('toggleDashboardButton');
+        const dashboardNavContainer = document.querySelector('.dashboard-nav-container');
+
+        toggleButton.addEventListener('click', function () {
+            dashboardNavContainer.classList.toggle('show');
+        });
+    });
+</script>
+-->

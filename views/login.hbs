@@ -1,0 +1,72 @@
+<div class="overlay"></div>
+<div class="logo-container">
+    <span class="logo"></span>
+    <span>LABIFY</span>
+</div>
+<div class="wrapper">
+    <div class="form-container">
+        <div class="form-top">
+            <p><a href="/login">Log in</a> or <a href="/signup">sign up</a></p>
+        </div>
+        <div class="form-header">
+            <p>Welcome to Labify</p>
+        </div>
+        <form method="POST">
+            <div>
+                <input class="form-round-input" type="text" placeholder="DLSU email" name="email" required>
+                <input class="form-round-input" type="password" placeholder="Password" name="password" required>
+                <p class="error">{{error}}</p>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" placeholder="Stay logged in">
+                    Stay logged in
+                </label>
+            </div>
+            <div>
+                <input class="form-round-input" type="submit" value="Log in">
+                <a href="/signup"><input class="form-round-input" type="button" value="Sign up"></a>
+            </div>
+        </form>
+        <div class="form-bottom">
+            <p>Labify Version 1.0</p>
+        </div>
+    </div>
+</div>
+<!--
+<div class="overlay"></div>
+<div class="logo-container">
+    <span class="logo"></span>
+    <span>LABIFY</span>
+</div>
+<div class="wrapper">
+    <div class="form-container">
+        <div class="form-top">
+            <p><a href="/login">Log in</a> or <a href="/signup">sign up</a></p>
+        </div>
+        <div class="form-header">
+            <p>Welcome to Labify</p>
+        </div>
+        <form method="POST" action="/login">
+            <div>
+                <input class="form-round-input" type="text" placeholder="DLSU email" name="email">
+                <input class="form-round-input" type="password" placeholder="Password" name="password">
+                <p class="error"></p>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" name="stayLoggedIn">
+                    Stay logged in
+                </label>
+            </div>
+            <div>
+                <input class="form-round-input" type="submit" value="Log in">
+                <a class="form-round-input" href="/signup">Sign up</a>
+            </div>
+        </form>
+        <div class="form-bottom">
+            <p>Labify Version 1.0</p>
+        </div>
+    </div>
+</div>
+-->

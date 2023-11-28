@@ -1,0 +1,99 @@
+/* Cover photo styles */
+.cover-photo {
+    position: relative;
+    height: 300px; /* Adjust as needed */
+    overflow: hidden;
+}
+
+/* Background color applied to the visible content */
+.cover-photo::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #135638; /* Set cover background color */
+    z-index: -1;
+}
+
+/* Main container styles */
+.main-container {
+    display: flex;
+    flex-direction: column; /* Stack the profile content and reservations */
+    width: 60%;
+    margin: 0 auto;
+    position: relative; /* Ensure z-index works within this container */
+}
+
+/* Profile content styles */
+.profile-content {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    position: relative; /* Ensure z-index works within this container */
+    z-index: 1; /* Ensure the profile content is above the cover */
+}
+
+/* Profile image overlay styles */
+.profile-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+    width: 50%; /* Half of the cover width */
+}
+
+/* Profile image styles */
+.profile-image img {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    object-fit: cover;
+    z-index: 2;
+    position: relative;
+}
+
+/* Profile details styles */
+.profile-details {
+    margin-left: 20px;
+}
+
+.profile-details h1 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.profile-details p {
+    font-size: 16px;
+}
+
+/* Reservations container styles */
+.reservations-container {
+    padding: 20px;
+    font-size: 16px;
+    z-index: 1; /* Ensure the reservations are above the cover */
+}
+
+/* Reservation item styles */
+.reservation-item {
+    margin-bottom: 20px;
+}
+
+/* Edit button style */
+.custom-button {
+    background: #1E481E;
+    border: none;
+    border-radius: 50px;
+    color: white;
+    cursor: pointer;
+    padding: 1.5rem;
+    width: 15rem;
+}
+
+#edit-description {
+    width: 100%;
+    resize: none; 
+    height: 100px;
+}

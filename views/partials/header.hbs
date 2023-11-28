@@ -1,0 +1,19 @@
+<div class="header">
+    <a class="logo-container" href="/">
+        <span class="logo"></span>
+        <span>LABIFY</span>
+    </a>
+    <div class="search-container">
+        <form action="/search">
+            <input type="text" placeholder="Search by building" name="building">
+            <input type="submit" value="">
+        </form>
+    </div>
+    <div class="nav">
+        <span><a href="/">Home</a></span>
+        {{#if account.isLoggedIn}}
+            <span><a href="/profile/{{account.email}}">Profile</a></span>
+            <span><a href="/logout">Logout</a></span>
+        {{/if}}
+    </div>
+</div>
