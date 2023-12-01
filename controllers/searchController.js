@@ -3,13 +3,14 @@ import reservationController from "../controllers/reservationController.js";
 import express from "express";
 
 const searchController = {
-    getSearch: async function(req, res){
-        const building = await Building.findOne({buildingNameLower: req.query.building.toLowerCase()}).lean();
+    getSearch: async function (req, res) {
+        const searchText = req.query.building.toLowerCase();
+        const buildings = await Building.find({ buildingNameLower: { $regex: searchText, $options: 'i' } }).lean();
 
         res.render("search", {
             css: "search",
             js: "search",
-            building: building
+            buildings: buildings
         });
     }
 };

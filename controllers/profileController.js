@@ -1,6 +1,17 @@
 import Account from "../models/Account.js";
 import Reservation from "../models/Reservation.js";
+import multer from "multer";
 
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, "public/uploads"); // Set the destination folder for uploaded files
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + "-" + file.originalname); // Set the file name to be unique
+    },
+});
+
+const upload = multer({ storage: storage });
 const profileController = {
     getProfile: async function(req, res){
         if(req.session.isLoggedIn){
@@ -40,25 +51,25 @@ const profileController = {
 
 
     updateProfile: async function (req, res) {
-        try {
-            const email = req.session.email; // Get email from session
-            const description = req.body.description;
-            const profilePicture = req.file ? '/uploads/' + req.file.filename : undefined; // Check if a file was uploaded
+        const email = req.session.email;
+        const description = req.body.description;
+        
+        // Check if a file was uploaded
+        if (req.file) {
+            const profilePicture = '/uploads/' + req.file.filename;
     
-            const updateData = { description };
-            if (profilePicture) {
-                updateData.profilePicture = profilePicture;
-            }
-    
-            // Update the user's profile in the database
-            await Account.findOneAndUpdate({ email: email }, updateData);
-    
-            // Redirect to the user's profile page after the update
-            res.redirect(`/profile/${email}`);
-        } catch (error) {
-            res.status(500).json({ message: 'Error updating profile', error: error });
+            // Update the user's profile with the new profile picture
+            await Account.findOneAndUpdate({ email: email }, { description, profilePicture });
+        } else {
+            // Update the user's profile without changing the profile picture
+            await Account.findOneAndUpdate({ email: email }, { description });
         }
+    
+        // Redirect to the user's profile page after the update
+        res.redirect(`/profile/${email}`);
     },
+    
+    
 
     deleteAccount: async function (req, res) {
         const email = req.session.email;

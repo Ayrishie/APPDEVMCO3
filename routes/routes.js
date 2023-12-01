@@ -1,5 +1,3 @@
-
-
 import express from "express";
 import indexController from "../controllers/indexController.js";
 import loginController from "../controllers/loginController.js";
@@ -67,7 +65,6 @@ export default routes;
 //routes.route("/search").get(searchController.getSearch);
 //routes.route("/search/getAvailableSeats").get(searchController.getAvailableSeats);
 //routes.route("/search/reserveSeat").post(searchController.reserveSeat); // This line might be causing the issue
-
 
 
 

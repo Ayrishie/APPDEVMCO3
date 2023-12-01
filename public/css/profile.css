@@ -35,15 +35,7 @@
     z-index: 1; /* Ensure the profile content is above the cover */
 }
 
-/* Profile image overlay styles */
-.profile-image-overlay {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    overflow: hidden;
-    width: 50%; /* Half of the cover width */
-}
+
 
 /* Profile image styles */
 .profile-image img {
