@@ -20,7 +20,7 @@ const profileController = {
             if(result){
                 const reservations = await Reservation.find({reservedBy: result.email}).lean();
 
-                const isOwnProfile = req.session.email === req.params.email; // Add this line
+                const isOwnProfile = req.session.email === req.params.email;
 
                 res.render("profile", {
                     title: req.params.email + " - Labify",
@@ -32,7 +32,7 @@ const profileController = {
                     },
                     result: result,
                     reservations,
-                    isOwnProfile // Add this line
+                    isOwnProfile 
                 });
             } else
                 res.render("profile", {
@@ -54,17 +54,17 @@ const profileController = {
         const email = req.session.email;
         const description = req.body.description;
         
+        let updateData = { description };
+    
         // Check if a file was uploaded
         if (req.file) {
             const profilePicture = '/uploads/' + req.file.filename;
-    
-            // Update the user's profile with the new profile picture
-            await Account.findOneAndUpdate({ email: email }, { description, profilePicture });
-        } else {
-            // Update the user's profile without changing the profile picture
-            await Account.findOneAndUpdate({ email: email }, { description });
+            updateData.profilePicture = profilePicture;
         }
-    
+        
+        // Update the user's profile
+        await Account.findOneAndUpdate({ email: email }, updateData);
+        
         // Redirect to the user's profile page after the update
         res.redirect(`/profile/${email}`);
     },

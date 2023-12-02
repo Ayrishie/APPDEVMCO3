@@ -33,6 +33,9 @@ app.engine("hbs", engine({extname: "hbs"}));
 app.set("view engine", "hbs");
 app.set("views", "./views");
 
+// Serve static files from the 'uploads' directory
+app.use('/uploads', express.static('uploads'));
+
 
 
 app.listen(port, () => {

@@ -40,9 +40,11 @@ document.addEventListener("DOMContentLoaded", function () {
             reader.onload = function (e) {
                 const imageUrl = e.target.result;
                 if (profileImage) {
-                   profileImage.src = imageUrl; // Update profile image if it exists
+                    profileImage.src = imageUrl; // Update profile image
                 }
-                navbarUserImage.src = imageUrl; // Update navbar user image
+                if (navbarUserImage) { // Check if navbarUserImage exists
+                    navbarUserImage.src = imageUrl; // Update navbar user image
+                }
                 console.log("Profile picture updated:", imageUrl);
             };
             reader.readAsDataURL(file);
