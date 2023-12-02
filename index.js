@@ -23,7 +23,7 @@ app.use(
 app.use(express.static(__dirname + "/public"));
 app.use(session({
     "secret": "secret",
-    "resave": true,
+    "resave": false,
     "saveUninitialized": false,
     store: MongoStore.create({mongoUrl: process.env.MONGODB_URI})
 }));
