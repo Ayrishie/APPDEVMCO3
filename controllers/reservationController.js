@@ -20,6 +20,11 @@ const reservationController = {
                 css: ["reservation"],
                 js: ["reservation"],
                 building: building,
+                account: {
+                    email: req.session.email,
+                    isLoggedIn: req.session.isLoggedIn,
+                    isTechnician: req.session.isTechnician
+                }
             });
         } catch (error) {
             // Handle other errors, log them, or send an appropriate response

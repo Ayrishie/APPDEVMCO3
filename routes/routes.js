@@ -6,7 +6,7 @@ import profileController from "../controllers/profileController.js";
 import reservationController from "../controllers/reservationController.js";
 import searchController from "../controllers/searchController.js";
 import signupController from "../controllers/signupController.js";
-import buildingController from '../controllers/buildingController';
+import buildingController from '../controllers/buildingController.js';
 import multer from "multer";
 import path from "path";
 import validation from "../helpers/validation.js";
