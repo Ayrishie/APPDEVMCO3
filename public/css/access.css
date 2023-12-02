@@ -163,7 +163,7 @@ body {
 
 .form-container form input[type="submit"]:disabled {
     background: lightgray;
-    border: lightgray;
+    border: lightgray solid 1px;
     color: gray;
     cursor: not-allowed;
 }

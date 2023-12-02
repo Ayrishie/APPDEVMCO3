@@ -1,4 +1,5 @@
 import Account from "../models/Account.js";
+import bcrypt from "bcrypt";
 
 const loginController = {
     getLogin: function(req, res){
@@ -11,25 +12,32 @@ const loginController = {
     },
 
     postLogin: async function(req, res){
-        const account = await Account.findOne({
-            email: req.body.email,
-            password: req.body.password
-        });
+        const account = await Account.findOne({ email: req.body.email }).lean();
 
         if(account) {
-            req.session.email = account.email;
-            req.session.isTechnician = account.isTechnician;
-            req.session.isLoggedIn = true;
+            bcrypt.compare(req.body.password, account.password, (err, equal) => {
+                if(equal){
+                    req.session.email = account.email;
+                    req.session.isTechnician = account.isTechnician;
+                    req.session.isLoggedIn = true;
 
-            res.redirect("/");
-        }
-        else
+                    res.redirect("/");
+                } else
+                    res.render("login", {
+                        title: "Log In - Labify",
+                        css: ["access"],
+                        // js: "login",
+                        exclude_header: true,
+                        error: "Email and/or password is incorrect."
+                    })
+            });
+        } else
             res.render("login", {
                 title: "Log In - Labify",
                 css: ["access"],
                 // js: "login",
                 exclude_header: true,
-                error: "Invalid login. Please try again."
+                error: "Email and/or password is incorrect."
             })
     }
 };

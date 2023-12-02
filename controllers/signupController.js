@@ -1,5 +1,7 @@
 import Account from "../models/Account.js";
+import bcrypt from "bcrypt";
 import { validationResult } from "express-validator";
+const salt_rounds = 10;
 
 const signupController = {
     getSignup: function(req, res){
@@ -11,15 +13,13 @@ const signupController = {
         });
     },
 
-    postSignup: async function (req, res) {
+    postSignup: function (req, res) {
         if(!validationResult(req).isEmpty()) {
             const validation_errors = validationResult(req).errors;
             let errors = {};
 
             for(let i = 0; i < validation_errors.length; i++)
                 errors["error_" + validation_errors[i].path] = validation_errors[i].msg;
-
-            console.log(errors);
 
             res.render("signup", {
                 title: "Sign Up - Labify",
@@ -29,12 +29,14 @@ const signupController = {
                 errors
             });
         } else
-            await Account.create({
-                email: req.body.email,
-                password: req.body.password,
-                isTechnician: req.body.isTechnician === "on"
-            }).then(() => {
-                res.redirect("/login");
+            bcrypt.hash(req.body.password, salt_rounds, (err, hash) => {
+                Account.create({
+                    email: req.body.email,
+                    password: hash,
+                    isTechnician: req.body.isTechnician === "on"
+                }).then(() => {
+                    res.redirect("/login");
+                });
             });
 
         /*
