@@ -39,7 +39,7 @@
 
             <!-- Reservations and other content -->
             <div class="reservations-container">
-                <p>Reservations:</p>
+                <strong><p>Reservations:</p></strong>
                 {{#each reservations}}
                     <div class="reservation-item">
                         <p>Seat Reserved: Seat {{this.seatID}}</p>
@@ -53,6 +53,17 @@
             </div>
         </div>
     </form>
+
+    <!-- Custom Confirmation Modal -->
+<div id="confirmationModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Are you sure you want to delete your account? You cannot undo this action.</p>
+        <button id="confirmDelete">Delete Account</button>
+        <button id="cancelDelete">Cancel</button>
+    </div>
+</div>
+
 {{else}}
     <p>{{error}}</p>
 {{/if}}

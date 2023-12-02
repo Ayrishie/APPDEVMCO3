@@ -11,7 +11,7 @@
 
 /* || RESERVATION CONTAINER */
 .reservation-container {
-    padding-top: 200px;
+    padding-top: 100px;
     display: flex;
     margin: auto;
     width: 85%;
@@ -47,6 +47,7 @@
     margin-bottom: 10px; /* Add spacing between paragraphs */
 }
 
+
 .reserve-button{
      background: #1E481E;
      border: none;
@@ -55,6 +56,7 @@
      cursor: pointer;
      padding: 1.5rem;
      width: 15rem;
+     margin-bottom: 10px;
  }
 
 .reserve-button:disabled{

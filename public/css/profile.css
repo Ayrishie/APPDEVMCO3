@@ -25,6 +25,7 @@
     width: 60%;
     margin: 0 auto;
     position: relative; /* Ensure z-index works within this container */
+    
 }
 
 .profile-button-container {
@@ -70,6 +71,11 @@
     font-size: 14px;
 }
 
+.profile-details h1, .profile-details p {
+    color: #333; /* Darker text for better contrast */
+    line-height: 1.4; /* Improved line spacing */
+}
+
 /* Reservations container styles */
 .reservations-container {
     padding: 20px;
@@ -79,7 +85,6 @@
 }
 
 .reservations-container p:first-of-type {
-    font-weight: bold;
     margin-bottom: 10px;
 }
 
@@ -111,3 +116,87 @@
     height: 100px;
 }
 
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%;
+    overflow: auto; 
+    background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity for dimming effect */
+    transition: all 0.3s ease-in-out; /* Smooth transition for opening/closing */
+}
+
+/* Enhanced Modal Content */
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 8px; 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Box shadow for depth */
+    width: 50%; /* Adjusted width for better layout */
+    transition: transform 0.3s ease-out; /* Smooth transform on opening */
+}
+
+/* Centered Modal Content */
+@media screen and (max-width: 600px) {
+    .modal-content {
+        width: 90%; /* Full width on smaller screens */
+    }
+}
+
+/* Enhanced Close Button */
+.close {
+    color: #777;
+    float: right;
+    font-size: 25px;
+    font-weight: normal; 
+}
+
+.close:hover,
+.close:focus {
+    color: #444; /* Darker color on hover/focus */
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Modal Paragraph Styling */
+.modal-content p {
+    color: #333; /* Darker color for text */
+    margin-bottom: 20px; /* Bottom margin for spacing */
+    font-size: 16px; /* Larger font size */
+    line-height: 1.6;
+}
+
+/* Modal Button Styling */
+.modal-content button {
+    padding: 10px 20px;
+    margin-right: 10px; /* Space between buttons */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s; /* Smooth background transition */
+}
+
+/* Confirm Delete Button Styling */
+#confirmDelete {
+    background-color: #dc3545; /* Red color */
+    color: white;
+}
+
+#confirmDelete:hover {
+    background-color: #c82333; /* Darker shade on hover */
+}
+
+/* Cancel Button Styling */
+#cancelDelete {
+    background-color: #6c757d; /* Grey color */
+    color: white;
+}
+
+#cancelDelete:hover {
+    background-color: #5a6268; /* Darker shade on hover */
+}

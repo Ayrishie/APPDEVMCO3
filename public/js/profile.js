@@ -59,12 +59,38 @@ document.addEventListener("DOMContentLoaded", function () {
         profilePictureUpload.value = ""; // Clear the file input selection
     });
 
-    $(".delete-button").on("click", function () {
+
+
+    
+    const deleteButton = $(".delete-button");
+    const modal = $("#confirmationModal");
+    const closeModal = $(".close");
+    const confirmDelete = $("#confirmDelete");
+    const cancelDelete = $("#cancelDelete");
+
+    // When the user clicks the button, open the modal
+    deleteButton.on("click", function (e) {
+        e.preventDefault();
+        modal.show();
+    });
+
+    // When the user clicks on <span> (x), close the modal
+    closeModal.on("click", function () {
+        modal.hide();
+    });
+
+    // When the user clicks confirm
+    confirmDelete.on("click", function () {
         $.ajax({
             url: "/profile/:email/deleteAccount",
             method: "DELETE",
         }).done(() => {
             window.location.href = "/";
         });
+    });
+
+    // When the user clicks cancel
+    cancelDelete.on("click", function () {
+        modal.hide();
     });
 });
