@@ -12,17 +12,21 @@ document.addEventListener("DOMContentLoaded", function () {
     if ($("#edit-profile-button").length) {
         editProfileButton.addEventListener("click", function () {
             userDescription.style.display = "none";
+            editProfileButton.style.display = "none";
             editDescriptionTextarea.style.display = "block";
             editDescriptionTextarea.removeAttribute("readonly"); // Enable text input
             saveProfileButton.style.display = "block";
+            profilePictureUpload.style.display = "block";
             editDescriptionTextarea.value = userDescription.textContent.replace("Description: ", "");
         });
 
         saveProfileButton.addEventListener("click", function () {
             userDescription.style.display = "block";
+            editProfileButton.style.display = "block";
             editDescriptionTextarea.style.display = "none";
             editDescriptionTextarea.setAttribute("readonly", "readonly");
             saveProfileButton.style.display = "none";
+            profilePictureUpload.style.display = "none";
             const editedDescription = editDescriptionTextarea.value.trim();
             userDescription.textContent = "Description: " + (editedDescription !== "" ? editedDescription : "No description available");
 

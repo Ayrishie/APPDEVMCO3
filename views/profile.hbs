@@ -25,11 +25,13 @@
                         <p id="user-description">{{result.description}}</p>
                         <textarea id="edit-description" name="description" style="display:none;">{{result.description}}</textarea>
                         {{#if isOwnProfile}}
-                            <!-- Profile Update Buttons -->
-                            <input type="file" id="profile-picture-upload" name="profilePicture">
-                            <button type="button" id="edit-profile-button" class="custom-button">Edit Profile</button>
-                            <button type="submit" id="save-profile-button" style="display:none;" class="custom-button">Save Profile</button>
-                            <button type="button" class="delete-button custom-button">Delete Account</button>
+                           <!-- Profile Update Buttons -->
+                            <div class="profile-button-container">
+                                <input type="file" id="profile-picture-upload" name="profilePicture" style="display:none;">
+                                <button type="button" id="edit-profile-button" class="custom-button">Edit Profile</button>
+                                <button type="submit" id="save-profile-button" style="display:none;" class="custom-button">Save Profile</button>
+                                <button type="button" class="delete-button custom-button">Delete Account</button>
+                            </div>
                         {{/if}}
                     </div>
                 </div>
