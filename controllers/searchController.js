@@ -10,7 +10,11 @@ const searchController = {
         res.render("search", {
             css: ["search"],
             js: ["search", "session"],
-            buildings: buildings
+            buildings: buildings,
+            account: {
+                email: req.session.email,
+                isLoggedIn: req.session.isLoggedIn
+            }
         });
     }
 };
