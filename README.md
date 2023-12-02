@@ -17,8 +17,7 @@ Labify is a laboratory reservation system which allows users to reserve laborato
 - supervisor
 
 # Set-up and Usage
-1. Clone the repository either by downloading the main branch as an archive or by executing `git clone https://github.com/arvention/ccapdev-hashing
-` with Git installed in your system
+1. Clone the repository either by downloading the main branch as an archive or by executing `git clone https://github.com/arvention/ccapdev-hashing` with Git installed in your system
 2. Open command prompt and navigate to the project folder of the cloned repository (must be extracted if the repository was downloaded as an archive)
 3. Use `npm install` to install the necessary dependencies
 4. Execute one of the following commands:
