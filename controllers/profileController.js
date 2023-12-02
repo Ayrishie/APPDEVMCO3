@@ -24,8 +24,8 @@ const profileController = {
 
                 res.render("profile", {
                     title: req.params.email + " - Labify",
-                    css: "profile",
-                    js: "profile",
+                    css: ["profile"],
+                    js: ["profile"],
                     account: {
                         email: req.session.email,
                         isLoggedIn: req.session.isLoggedIn
@@ -37,8 +37,8 @@ const profileController = {
             } else
                 res.render("profile", {
                     title: "Profile - Labify",
-                    css: "profile",
-                    js: "profile",
+                    css: ["profile"],
+                    js: ["profile"],
                     account: {
                         email: req.session.email,
                         isLoggedIn: req.session.isLoggedIn

@@ -7,7 +7,6 @@ import { engine } from "express-handlebars";
 import session from "express-session";
 import mongoose from "mongoose";
 import * as url from "url";
-import validator from "validator";
 import routes from "./routes/routes.js";
 
 const app = express();
@@ -35,8 +34,6 @@ app.set("views", "./views");
 
 // Serve static files from the 'uploads' directory
 app.use('/uploads', express.static('uploads'));
-
-
 
 app.listen(port, () => {
     console.log("Server listening on port " + port);

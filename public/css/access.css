@@ -126,7 +126,7 @@ body {
 
 .form-container form > :nth-child(1) p {
     color: red;
-    /* display: none; */
+    display: none;
     font-size: 1.5rem;
     margin: 0 auto 0 1em;
 }
@@ -160,6 +160,13 @@ body {
     background: #1E481E;
     border: #1E481E solid 1px;
     color: white;
+}
+
+.form-container form input[type="submit"]:disabled {
+    background: lightgray;
+    border: lightgray;
+    color: gray;
+    cursor: not-allowed;
 }
 
 .form-container form > :nth-child(3) a {

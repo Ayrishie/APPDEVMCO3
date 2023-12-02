@@ -8,8 +8,8 @@ const searchController = {
         const buildings = await Building.find({ buildingNameLower: { $regex: searchQuery, $options: 'i' } }).lean();
 
         res.render("search", {
-            css: "search",
-            js: "search",
+            css: ["search"],
+            js: ["search"],
             buildings: buildings
         });
     }

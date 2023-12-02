@@ -4,7 +4,7 @@ const loginController = {
     getLogin: function(req, res){
         res.render("login", {
             title: "Log In - Labify",
-            css: "access",
+            css: ["access"],
             // js: "login",
             exclude_header: true
         });
@@ -26,7 +26,7 @@ const loginController = {
         else
             res.render("login", {
                 title: "Log In - Labify",
-                css: "access",
+                css: ["access"],
                 // js: "login",
                 exclude_header: true,
                 error: "Invalid login. Please try again."

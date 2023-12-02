@@ -17,8 +17,8 @@ const reservationController = {
     
             res.render("reservation", {
                 title: building.buildingName + " - Labify",
-                css: "reservation",
-                js: "reservation",
+                css: ["reservation"],
+                js: ["reservation"],
                 building: building,
             });
         } catch (error) {

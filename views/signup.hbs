@@ -13,11 +13,10 @@
         </div>
         <form method="POST">
             <div>
-                <input class="form-round-input" type="text" placeholder="DLSU email" name="email" required>
-                <!--<p class="error-email">Please enter a DLSU email (email@dlsu.edu.ph).</p>-->
-                <input class="form-round-input" type="password" placeholder="Password" name="password" required>
-                <!--<p class="error-password">Please enter at least 8 characters.</p>-->
-                <p class="error">{{error}}</p>
+                <input class="form-round-input input-email" type="text" placeholder="DLSU email" name="email" required>
+                <p class="error-email"></p>
+                <input class="form-round-input input-password" type="password" placeholder="Password" name="password" required>
+                <p class="error-password"></p>
             </div>
             <div>
                 <label>
@@ -26,7 +25,7 @@
                 </label>
             </div>
             <div>
-                <input class="form-round-input" type="submit" value="Sign up">
+                <input class="form-round-input" type="submit" value="Sign up" disabled>
                 <a href="/login"><input class="form-round-input" type="button" value="Log in"></a>
             </div>
         </form>

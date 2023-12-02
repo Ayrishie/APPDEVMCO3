@@ -4,13 +4,22 @@ const signupController = {
     getSignup: function(req, res){
         res.render("signup", {
             title: "Sign Up - Labify",
-            css: "access",
-            // js: "signup",
+            css: ["access"],
+            js: ["validator.min", "signup"],
             exclude_header: true
         });
     },
 
     postSignup: async function (req, res) {
+        await Account.create({
+            email: req.body.email,
+            password: req.body.password,
+            isTechnician: req.body.isTechnician === "on"
+        }).then(() => {
+            res.redirect("/login");
+        });
+
+        /*
         const account = await Account.findOne({email: req.body.email});
 
         if(!account){
@@ -25,10 +34,17 @@ const signupController = {
             res.render("signup", {
                 title: "Sign Up - Labify",
                 css: "access",
-                // js: "signup",
+                js: "signup",
                 exclude_header: true,
                 error: "This email is already registered."
             })
+        */
+    },
+
+    checkEmail: async function(req, res){
+        const data = await Account.findOne({email: req.query.email});
+
+        res.send(data);
     }
 };
 

@@ -44,16 +44,13 @@ routes.route("/reservation/:buildingID").post(reservationController.postReservat
 routes.route("/reservation/:buildingID/getReservations").get(reservationController.getReservations);
 routes.route("/reservation/:buildingID/deleteReservation").delete(reservationController.deleteReservation);
 
-
-
-/* Search Updated routes  */
+/* Search  */
 routes.route("/search").get(searchController.getSearch);
-
-
 
 /* Signup */
 routes.route("/signup").get(signupController.getSignup);
 routes.route("/signup").post(signupController.postSignup);
+routes.route("/checkEmail").get(signupController.checkEmail);
 
 export default routes;
 
