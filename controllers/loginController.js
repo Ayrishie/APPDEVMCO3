@@ -6,7 +6,7 @@ const loginController = {
         res.render("login", {
             title: "Log In - Labify",
             css: ["access"],
-            // js: "login",
+            js: ["session"],
             exclude_header: true
         });
     },

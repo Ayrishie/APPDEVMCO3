@@ -8,7 +8,7 @@ const signupController = {
         res.render("signup", {
             title: "Sign Up - Labify",
             css: ["access"],
-            js: ["validator.min", "signup"],
+            js: ["validator.min", "signup", "session"],
             exclude_header: true
         });
     },

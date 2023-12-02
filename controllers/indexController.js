@@ -7,7 +7,7 @@ const indexController = {
         if(req.session.isLoggedIn){
             res.render("index", {
                 title: "Labify - Laboratory Reservation",
-                css: ["index"],
+                css: ["index", "session"],
                 buildings: buildings,
                 account: {
                     email: req.session.email,

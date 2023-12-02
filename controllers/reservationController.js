@@ -18,7 +18,7 @@ const reservationController = {
             res.render("reservation", {
                 title: building.buildingName + " - Labify",
                 css: ["reservation"],
-                js: ["reservation"],
+                js: ["reservation", "session"],
                 building: building,
                 account: {
                     email: req.session.email,

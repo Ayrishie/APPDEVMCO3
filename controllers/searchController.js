@@ -9,7 +9,7 @@ const searchController = {
 
         res.render("search", {
             css: ["search"],
-            js: ["search"],
+            js: ["search", "session"],
             buildings: buildings
         });
     }
