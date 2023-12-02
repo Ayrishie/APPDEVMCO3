@@ -1,8 +1,9 @@
 /* Cover photo styles */
 .cover-photo {
     position: relative;
-    height: 300px; /* Adjust as needed */
+    height: 300px;
     overflow: hidden;
+    display: none; /* hide for now */
 }
 
 /* Background color applied to the visible content */
@@ -13,7 +14,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #135638; /* Set cover background color */
+    background-color: #135638; /* cover background color */
     z-index: -1;
 }
 
@@ -29,13 +30,10 @@
 /* Profile content styles */
 .profile-content {
     display: flex;
+    flex-direction: column; /* Updated to stack items vertically */
     align-items: center;
-    padding: 20px;
-    position: relative; /* Ensure z-index works within this container */
-    z-index: 1; /* Ensure the profile content is above the cover */
+    text-align: center; /* Center-align content */
 }
-
-
 
 /* Profile image styles */
 .profile-image img {
@@ -45,6 +43,8 @@
     object-fit: cover;
     z-index: 2;
     position: relative;
+    margin-bottom: 10px;
+    margin-top: 20px;
 }
 
 /* Profile details styles */
@@ -53,19 +53,22 @@
 }
 
 .profile-details h1 {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
 }
 
 .profile-details p {
-    font-size: 16px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 14px;
 }
 
 /* Reservations container styles */
 .reservations-container {
     padding: 20px;
     font-size: 16px;
-    z-index: 1; /* Ensure the reservations are above the cover */
+    margin-top: 20px;
+    border-top: 1px solid #ccc;
 }
 
 /* Reservation item styles */
@@ -80,12 +83,19 @@
     border-radius: 50px;
     color: white;
     cursor: pointer;
-    padding: 1.5rem;
-    width: 15rem;
+    padding: 12px 24px;
+    width: auto;
+    margin: 10px 5px;
+}
+
+/* Red color for the delete button */
+.custom-button.delete-button {
+    background: #830000;
 }
 
 #edit-description {
     width: 100%;
-    resize: none; 
+    resize: none;
     height: 100px;
 }
+
