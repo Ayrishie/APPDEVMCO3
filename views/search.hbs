@@ -1,9 +1,10 @@
-{{#if building}}
+{{#if buildings.length}}
+  {{#each buildings}}
   <div class="reservation-container">
     <div class="reservation">
         <span></span>
         <div class="reservation-details">
-            <p class="building" data-building-id="{{building.buildingID}}"><b>{{building.buildingName}}</b></p>
+            <p class="building" data-building-id="{{this.buildingID}}"><b>{{this.buildingName}}</b></p>
             <div class="select-wrapper">
                 <span class="dropdown-arrow"></span>
                 <select class="date-options"></select>
@@ -35,8 +36,8 @@
         </div>
     </div>
     <div class="seats-container"></div>
-</div>
-
+  </div>
+  {{/each}}
 {{else}}
-    <p class="empty-message">There's no building in that name, search again</p>
+    <p class="empty-message">There's no building with that name, search again</p>
 {{/if}}
