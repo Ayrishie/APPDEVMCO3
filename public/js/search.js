@@ -127,6 +127,11 @@ $(function(){
         generate_seats();
     });
 
+
+    
     generate_dates();
     generate_seats();
+
+
+    
 });

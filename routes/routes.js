@@ -6,6 +6,7 @@ import profileController from "../controllers/profileController.js";
 import reservationController from "../controllers/reservationController.js";
 import searchController from "../controllers/searchController.js";
 import signupController from "../controllers/signupController.js";
+import buildingController from '../controllers/buildingController';
 import multer from "multer";
 import path from "path";
 import validation from "../helpers/validation.js";
@@ -14,10 +15,10 @@ const routes = express.Router();
 // Set up storage for Multer
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, 'uploads/'); // Adjust the directory according to your project structure
+        cb(null, 'uploads/'); 
     },
     filename: function(req, file, cb) {
-        cb(null, Date.now() + path.extname(file.originalname)); // Use the date and original file extension
+        cb(null, Date.now() + path.extname(file.originalname)); 
     }
 });
 
@@ -26,6 +27,9 @@ const upload = multer({ storage: storage });
 
 /* Index */
 routes.route("/").get(indexController.getIndex);
+
+// Add a route for building pages
+routes.route('/building/:id').get(buildingController.getBuildingPage);
 
 /* Login */
 routes.route("/login").get(loginController.getLogin);
@@ -54,15 +58,3 @@ routes.route("/signup").post(validation.signupValidation(), signupController.pos
 routes.route("/checkEmail").get(signupController.checkEmail);
 
 export default routes;
-
-// baka magamit
-
-//routes.route("/reservation/:buildingID/reserveSeat").post(searchController.reserveSeat);
-//routes.route("/reservation/:buildingID/getAvailableSeats").get(searchController.getAvailableSeats);
-
-//routes.route("/search").get(searchController.getSearch);
-//routes.route("/search/getAvailableSeats").get(searchController.getAvailableSeats);
-//routes.route("/search/reserveSeat").post(searchController.reserveSeat); // This line might be causing the issue
-
-
-

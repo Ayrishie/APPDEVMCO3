@@ -1,384 +1,61 @@
-
-
-/* || RESERVATION CONTAINER */
-.reservation-container {
-    padding-top: 200px;
+/* Results Page Container */
+.results-container {
     display: flex;
-    margin: auto;
-    width: 85%;
-    justify-content: center; /* Center the reservation content */
-}
-
-/* || RESERVATION */
-.reservation {
-    display: flex;
-    max-width: 900px; /* Adjust the max-width as needed */
+    justify-content: center;
+    align-items: flex-start; /* Align items at the top */
+    min-height: 100vh;
+    padding-top: 20px; /* Add a small space at the top */
+  }
+  
+  /* Building Grid Layout */
+  .buildings-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Display 4 buildings per row */
+    gap: 20px;
+    justify-items: center;
+    max-width: 1200px; /* Set a max width for the grid */
+    width: 100%; /* Ensure the grid takes the full width */
+    padding: 0 20px; /* Add horizontal padding */
+  }
+  
+  /* Building Box Styling */
+  .building-box {
+    text-decoration: none;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
-    border-radius: 10px; /* Add rounded corners */
-    overflow: hidden; /* Hide overflow content */
-}
-
-.reservation > span {
+    max-width: 300px;
+  }
+  
+  .building-box:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* Building Image Styling */
+  .building-image {
     background: url("/img/lab-1.jpg") 50% 50% no-repeat;
+    height: 150px;
     background-size: cover;
-    height: 300px;
-    width: 300px;
-    flex-shrink: 0; /* Don't allow image to shrink */
-}
-
-.reservation-details {
-    flex-grow: 1; /* Allow details to grow to fill available space */
-    padding: 20px; /* Add padding to details */
-}
-
-/*new*/
-.reservation-details p {
-    font-size: 1.8rem;
-    margin-bottom: 10px; /* Add spacing between paragraphs */
-}
-
-.reserve-button{
-     background: #1E481E;
-     border: none;
-     border-radius: 50px;
-     color: white;
-     cursor: pointer;
-     padding: 1.5rem;
-     width: 15rem;
- }
-
-.reserve-button:disabled{
-    background: lightgray;
-    color: gray;
-    cursor: not-allowed;
-}
-
-.seats-container{
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.seats-container p{
-    display: none;
-}
-
-.seat-wrapper{
-    display: flex;
-    justify-content: center;
-    flex: 1 1 20%;
-}
-
-.seat {
-    display: inline-block;
-    width: 30px; /* Adjust based on your design */
-    height: 30px; /* Adjust based on your design */
-    background-color: #ccc; /* Adjust based on your design */
-    border-radius: 50%;
-    text-align: center;
-    line-height: 30px; /* Adjust based on your design */
-}
-
-
-.seat-selected{
-    background: gray;
-}
-
-.seat-reserved{
-    background: #1E481E;
-}
-
-/* || SEATS */
-/*
-.seats-container{
-    background: #f9f9ff;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-}
-
-.seat{
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-    border: 2px solid #1E481E;
-    border-radius: 50%;
-    color: black;
-    display: flex;
-    height: 1.75rem;
-    flex-basis: 1.75rem;
-    cursor: pointer;
-}
-
-.reserved{
-    background: #1E481E;
-}
-
-.legend{
-    display: flex;
-    gap: 0.5rem;
-}
-
-.legend span{
-    display: inline-block;
-    border-radius: 50%;
-}
-
-.legend-available{
-    border: 1px solid #1E481E;
-    box-sizing: border-box;
-    height: 1rem;
-    width: 1rem;
-}
-
-.legend-reserved{
-    background: #1E481E;
-    height: 1rem;
-    width: 1rem;
-}
-*/
-
-/* styles for the drop-down arrow container */
-.dropdown-arrow-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #1b0202; /* Added border */
-    border-radius: 10px; /* Added border radius */
-    padding: 5px; /* Added padding */
-    margin-bottom: 10px; /* Adjusted margin */
-}
-
-/* styles for the drop-down arrow content */
-.dropdown-arrow-content {
-    display: flex;
-    align-items: center;
-    cursor: pointer; /* Make the content clickable */
-    margin-right: 10px;
-    position: relative;
-    user-select: none;
-}
-
-/*
-.dropdown-arrow {
-    width: 15px;
-    height: 15px;
-    padding: 5px;
-}
-*/
-
-
-/* Dropdown button styles for date dropdown NEW */
-#dropdown-arrow,
-#dropdown-time {
-    background-color: #1b0202;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    margin-right: 10px;
-    padding: 10px 15px; /* Adjust padding */
-    border-radius: 5px; /* Add rounded corners */
-}
-
-
-/* Style for date dropdown content */
-.date-dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #333;
-    right: 0;
-    top: 100%; /* dropdown below the date button */
-    z-index: 1;
-    width: 150px;
-}
-
-/* Style for dropdown list */
-.date-dropdown-content ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-/* Style for dropdown list items */
-.date-dropdown-content li {
-    margin: 0;
-    padding: 0;
-}
-
-.date-dropdown-content a {
-    color: #fff;
-    text-decoration: none;
-    padding: 8px 12px;
-    display: block;
-}
-
-/* Style for dropdown list items on hover */
-.date-dropdown-content a:hover {
-    background-color: #555;
-}
-
-/* Content section styles */
-.content {
-    padding-top: 50px;
-    display: flex;
-    margin-top: 20px;
-    padding-left: 120px;
-    padding-top: 50px;
-}
-
-/* Content image styles */
-.content img {
-    max-width: 100%;
-    height: auto;
-    max-height: 300px;
-}
-
-/* Content information styles */
-.content .info {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-left: 20px;
-    line-height: 1.5; /* Increased line spacing */
-}
-
-/* Content title styles */
-.content h1 {
-    font-size: 24px;
-    margin-bottom: 5px;
-}
-
-/* Content paragraph styles */
-.content p {
-    font-size: 14px;
-    margin: 0;
-}
-
-
-/* Scroll pane content styles */
-.scroll-pane-content {
-    padding-top: 50px;
-    padding-left: 20px;
-    padding-right: 20px;
-    background-color: #f0f0f0;
-    padding: 10px 0;
-    max-height: 300px; /* max-height for scroll pane */
-    overflow-y: auto;
-    margin-top: 10px;
-    margin-left: 20px;
-    width: 300px;
-    border-radius: 10px;
-    overflow-y: scroll;
-}
-
-/* Availability date styles */
-.availability-date {
-    margin-bottom: 20px; /* to separate date blocks */
-}
-
-/* Availability slot styles */
-.availability-slot {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    background-position: center;
     border-bottom: 1px solid #ddd;
-    padding: 10px 0;
-}
-
-/* Time slot styles */
-.time-slot {
-    font-weight: bold;
-}
-
-/* Availability status styles */
-.availability-status {
-    color: green;
-    font-weight: bold;
-}
-
-
-/* Style for time dropdown content */
-.time-dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #333;
-    right: 0;
-    top: 100%; /* dropdown below the time button */
-    z-index: 1;
-    width: 200px; /* Adjusted width */
-}
-
-/* Show time dropdown when button is clicked */
-.dropdown-button:focus + .time-dropdown-content {
-    display: block;
-}
-
-/* Style for dropdown list items in time dropdown */
-.time-dropdown-content ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-/* Style for dropdown list items on hover in time dropdown */
-.time-dropdown-content a {
-    color: #fff;
-    text-decoration: none;
-    padding: 8px 12px;
-    display: block;
-}
-
-.time-dropdown-content a:hover {
-    background-color: #555;
-}
-
-/* Dropdown button styles for time dropdown */
-#dropdown-time {
-    background-color: transparent;
-    color: #1b0202;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    margin-right: 10px;
-    padding: 0;
-    z-index: 2;
-    position: relative;
-}
-
-/* Reserve Button (Reserve Button) */
-.reserve-button {
-    cursor: pointer;
-    padding: 15px 40px;
-    margin-top: 20px; /* Add more top margin */
-    border-radius: 25px;
-    border: none;
-    background: #1E481E;
-    color: #fff;
-    text-decoration: none;
-    transition: transform 0.2s;
-    display: inline-block;
-}
-
-.reserve-button:disabled {
-    background: lightgray;
-    color: gray;
-    cursor: not-allowed; /* Make cursor consistent */
-}
-
-/* Show date dropdown when button is clicked */
-.dropdown-button:focus + .date-dropdown-content {
-    display: block;
-}
-
-/* Style for empty or invalid query message */
-p.empty-message {
-    padding-top: 50px;
+  }
+  
+  /* Building Name Styling */
+  .building-name {
+    padding: 15px;
     text-align: center;
-    font-size: 2.5rem;
     font-weight: bold;
-    color: red;
-    margin-top: 20px; /* Add top margin for spacing */
-}
+  }
+  
+  /* No Results Message Styling */
+  .no-results-message {
+    text-align: center;
+    font-size: 1.2em;
+    color: #666;
+  }
+  
