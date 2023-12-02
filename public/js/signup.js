@@ -12,12 +12,12 @@ $(function(){
             }).done((data) => {
                 if(data.email !== validator.trim($(".input-email").val())) {
                     if (input_field.is($(".input-email")))
-                        $(".error-email").hide().text("");
+                        $(".error-email").text("");
 
                     return callback_function(true);
                 } else {
                     if (input_field.is($(".input-email")))
-                        $(".error-email").show().text("Email is already registered.");
+                        $(".error-email").text("Email is already registered.");
 
                     return callback_function(false);
                 }
@@ -28,13 +28,13 @@ $(function(){
     function is_valid_password(input_field){
         if(validator.isLength(validator.trim($(".input-password").val()), {min: 8})) {
             if (input_field.is($(".input-password"))){
-                $(".error-password").hide().text("");
+                $(".error-password").text("");
 
                 return true;
             }
         } else
             if(input_field.is($(".input-password"))){
-                $(".error-password").show().text("Password must at least be 8 characters.");
+                $(".error-password").text("Password must at least be 8 characters.");
 
                 return false;
             }
@@ -45,7 +45,7 @@ $(function(){
     function validate_field(input_field, input_field_name, error_container){
         if(validator.isEmpty(validator.trim(input_field.val()))){
             input_field.prop("value", "");
-            error_container.show().text(input_field_name + " cannot be empty.");
+            error_container.text(input_field_name + " cannot be empty.");
         } else
             error_container.text("");
 
@@ -85,11 +85,11 @@ $(function () {
                     window.location.href = '/login'; // Redirect on success
                 },
                 error: function() {
-                    $(".error").text("Signup failed. Please try again.").show();
+                    $(".error").text("Signup failed. Please try again.");
                 }
             });
         } else {
-            $(".error").text("Incomplete details, please try again.").show();
+            $(".error").text("Incomplete details, please try again.");
         }
     });
 });

@@ -14,9 +14,9 @@
         <form method="POST">
             <div>
                 <input class="form-round-input input-email" type="text" placeholder="DLSU email" name="email" required>
-                <p class="error-email"></p>
+                <p class="error-email">{{errors.error_email}}</p>
                 <input class="form-round-input input-password" type="password" placeholder="Password" name="password" required>
-                <p class="error-password"></p>
+                <p class="error-password">{{errors.error_password}}</p>
             </div>
             <div>
                 <label>

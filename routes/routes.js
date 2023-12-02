@@ -8,6 +8,7 @@ import searchController from "../controllers/searchController.js";
 import signupController from "../controllers/signupController.js";
 import multer from "multer";
 import path from "path";
+import validation from "../helpers/validation.js";
 const routes = express.Router();
 
 // Set up storage for Multer
@@ -49,7 +50,7 @@ routes.route("/search").get(searchController.getSearch);
 
 /* Signup */
 routes.route("/signup").get(signupController.getSignup);
-routes.route("/signup").post(signupController.postSignup);
+routes.route("/signup").post(validation.signupValidation(), signupController.postSignup);
 routes.route("/checkEmail").get(signupController.checkEmail);
 
 export default routes;

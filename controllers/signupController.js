@@ -1,4 +1,5 @@
 import Account from "../models/Account.js";
+import { validationResult } from "express-validator";
 
 const signupController = {
     getSignup: function(req, res){
@@ -11,13 +12,30 @@ const signupController = {
     },
 
     postSignup: async function (req, res) {
-        await Account.create({
-            email: req.body.email,
-            password: req.body.password,
-            isTechnician: req.body.isTechnician === "on"
-        }).then(() => {
-            res.redirect("/login");
-        });
+        if(!validationResult(req).isEmpty()) {
+            const validation_errors = validationResult(req).errors;
+            let errors = {};
+
+            for(let i = 0; i < validation_errors.length; i++)
+                errors["error_" + validation_errors[i].path] = validation_errors[i].msg;
+
+            console.log(errors);
+
+            res.render("signup", {
+                title: "Sign Up - Labify",
+                css: ["access"],
+                js: ["validator.min", "signup"],
+                exclude_header: true,
+                errors
+            });
+        } else
+            await Account.create({
+                email: req.body.email,
+                password: req.body.password,
+                isTechnician: req.body.isTechnician === "on"
+            }).then(() => {
+                res.redirect("/login");
+            });
 
         /*
         const account = await Account.findOne({email: req.body.email});
