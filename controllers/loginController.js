@@ -21,6 +21,9 @@ const loginController = {
                     req.session.isTechnician = account.isTechnician;
                     req.session.isLoggedIn = true;
 
+                    if(req.body.stayLoggedIn === "on")
+                        req.session.cookie.maxAge = 1814400000;
+
                     res.redirect("/");
                 } else
                     res.render("login", {

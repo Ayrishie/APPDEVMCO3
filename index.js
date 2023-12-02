@@ -50,13 +50,3 @@ app.listen(port, () => {
         console.log("Connected to database");
     });
 });
-app.get('/search', (req, res) => {
-    // Check if it's an AJAX request
-    if (req.xhr || req.headers.accept.indexOf('json') > -1) {
-        // If it's an AJAX request, return JSON
-        res.json({ building: 'your_building_data_here' });
-    } else {
-        // If it's a regular request, render HTML
-        res.render('search', { building: 'your_building_data_here' });
-    }
-});
