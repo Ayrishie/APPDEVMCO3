@@ -3,10 +3,13 @@
         <span></span>
         <div class="reservation-details">
             <p class="building" data-building-id="{{building.buildingID}}"><b>{{building.buildingName}}</b></p>
+            <hr>
+            <br>
             <div class="select-wrapper">
                 <span class="dropdown-arrow"></span>
                 <select class="date-options"></select>
             </div>
+            <br>
             <div class="select-wrapper">
                 <span class="dropdown-arrow"></span>
                 <select class="time-options">
@@ -22,16 +25,17 @@
                 </select>
             </div>
             <button class="reserve-button" disabled>Reserve</button>
+            {{#if account.isTechnician}}
+                <button class="delete-button">Delete</button>
+            {{/if}}
+            <br>
             <!-- TODO: Implement back-end logic for anonymous reservations -->
             <label>
                 <input type="checkbox" class="reserve-anonymously-checkbox">
                 Reserve anonymously
             </label>
-            {{#if account.isTechnician}}
-                <button class="delete-button">Delete</button>
-            {{/if}}
-            <div class="temp"></div>
         </div>
     </div>
     <div class="seats-container"></div>
+    <div class="temp"></div>
 </div>
