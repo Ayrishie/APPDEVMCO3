@@ -43,8 +43,8 @@ $(document).ready(function () {
                 const interval = $("<option>" + ms_to_12h_time(i) + " – " + ms_to_12h_time(i + 1800000) + "</option>");
 
                 $(".time-options").append(interval);
-                interval.data("startTime", i);
-                interval.data("endTime", i + 1800000);
+                interval.data("timeStart", i);
+                interval.data("timeEnd", i + 1800000);
             }
         }
 
@@ -87,6 +87,8 @@ $(document).ready(function () {
                         seat.addClass("seat-reserved");
                         seat.data("reservationDate", reservation.reservationDate);
                         seat.data("reservationTime", reservation.reservationTime);
+                        seat.data("reservationTimeStart", reservation.reservationTimeStart);
+                        seat.data("reservationTimeEnd", reservation.reservationTimeEnd);
                         seat.data("reservedBy", reservation.reservedBy);
                         seat.data("isAnonymous", reservation.isAnonymous); // Set the isAnonymous attribute
 
@@ -165,13 +167,18 @@ $(document).ready(function () {
                         reservedBy: selected_seat.data("reservedBy"),
                         reservationDate: $(".date-options").find(":selected").val(),
                         reservationTime: $(".time-options").find(":selected").val(),
+                        reservationTimeStart: $(".time-options").find(":selected").data("timeStart"),
+                        reservationTimeEnd: $(".time-options").find(":selected").data("timeEnd"),
                         seatID: selected_seat.data("seatID")
                     },
                     method: "DELETE"
                 }).done(() => {
-                    selected_seat.blur();
                     selected_seat.removeClass("seat-selected");
                     generate_seats();
+                }).fail(() => {
+                    selected_seat.removeClass("seat-selected");
+                    $(".temp").empty();
+                    $(".temp").append($("<p>Deletion failed. Please make sure that you are at least 10 minutes of the actual reservation time.</p>"));
                 });
             });
 
@@ -189,6 +196,8 @@ $(document).ready(function () {
                     building: $(".building").text(),
                     reservationDate: $(".date-options").find(":selected").val(),
                     reservationTime: $(".time-options").find(":selected").val(),
+                    reservationTimeStart: $(".time-options").find(":selected").data("timeStart"),
+                    reservationTimeEnd: $(".time-options").find(":selected").data("timeEnd"),
                     seatID: selected_seat.data("seatID"),
                     isAnonymous: isAnonymous
                 },
@@ -199,7 +208,6 @@ $(document).ready(function () {
                 complete: function () {
                     console.log("AJAX request complete");
                     $(".reserve-button").prop("disabled", true);
-                    selected_seat.blur();
                     selected_seat.removeClass("seat-selected");
                     generate_seats();
                 },

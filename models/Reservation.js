@@ -22,6 +22,14 @@ const reservationSchema = new Schema({
         type: String,
         required: true
     },
+    reservationTimeStart: {
+        type: Number,
+        required: true
+    },
+    reservationTimeEnd: {
+        type: Number,
+        required: true
+    },
     seatID: {
         type: Number,
         required: true
