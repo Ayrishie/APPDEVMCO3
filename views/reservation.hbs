@@ -3,8 +3,6 @@
         <span></span>
         <div class="reservation-details">
             <p class="building" data-building-id="{{building.buildingID}}"><b>{{building.buildingName}}</b></p>
-            <hr>
-            <br>
             <div class="select-wrapper">
                 <span class="dropdown-arrow"></span>
                 <select class="date-options"></select>
@@ -12,19 +10,10 @@
             <br>
             <div class="select-wrapper">
                 <span class="dropdown-arrow"></span>
-                <select class="time-options">
-                    <option>7:30 AM – 8:00 AM</option>
-                    <option>8:00 AM – 8:30 AM</option>
-                    <option>8:30 AM – 9:00 AM</option>
-                    <option>9:00 AM – 9:30 AM</option>
-                    <option>9:30 AM – 10:00 AM</option>
-                    <option>10:00 AM – 10:30 AM</option>
-                    <option>10:30 AM – 11:00 AM</option>
-                    <option>11:00 AM – 11:30 AM</option>
-                    <option>11:30 AM – 12:00 PM</option>
-                </select>
+                <select class="time-options"></select>
             </div>
             <button class="reserve-button" disabled>Reserve</button>
+            <br>
             {{#if account.isTechnician}}
                 <button class="delete-button">Delete</button>
             {{/if}}
@@ -35,6 +24,10 @@
                 Reserve anonymously
             </label>
         </div>
+    </div>
+    <div class="legend">
+        <span><span class="legend-available"></span>Available</span>
+        <span><span class="legend-reserved"></span>Reserved</span>
     </div>
     <div class="seats-container"></div>
     <div class="temp"></div>

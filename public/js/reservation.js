@@ -14,6 +14,47 @@ $(document).ready(function () {
             }
         }
 
+        function ms_to_12h_time(ms){
+            const hours = ms / (60 * 60 * 1000);
+            const minutes = (hours % Math.floor(hours)) * 60;
+
+            /*
+            (Math.floor(hours) > 12 ? Math.floor(hours) % 12 : Math.floor(hours))
+                => tanggal decimal at gawing 12h version ang 13h to 24h
+
+             (minutes < 10 ? "0" : "")
+                => dagdag zero pag kulang para two digits
+
+            (hours % 12 < 12 ? "AM" : "PM")
+                => pm kung lagpas tanghali (in 12h format) at am kung hindi
+            */
+            return (Math.floor(hours) > 12 ? Math.floor(hours) % 12 : Math.floor(hours)) + ":" + minutes + (minutes < 10 ? "0" : "") + " " + (hours % 12 < 12 ? "AM" : "PM");
+        }
+
+        function generate_time_slots(){
+            // Current time in milliseconds
+            const current_time = new Date().getHours() * 60 * 60 * 1000;
+
+            // 07:30 (27000000) to 16:00 (57600000 + 1800000) in milliseconds
+            for(let i = 27000000; i < 57600000; i  +=  1800000){
+                if(current_time > i)
+                    continue;
+
+                const interval = $("<option>" + ms_to_12h_time(i) + " – " + ms_to_12h_time(i + 1800000) + "</option>");
+
+                $(".time-options").append(interval);
+                interval.data("startTime", i);
+                interval.data("endTime", i + 1800000);
+            }
+        }
+
+        function meron_bang_time_slots(){
+            if($(".time-options").children().length === 0){
+                $(".reservation-container").empty();
+                $(".reservation-container").append($("<p>No slots available at this time. Please try again later.</p>"));
+            }
+        }
+
         function generate_seats() {
             const seats_container = $(".seats-container");
             let reservations = [];
@@ -192,10 +233,10 @@ $(document).ready(function () {
         });
 
         generate_dates();
+        generate_time_slots();
         generate_seats();
-
+        meron_bang_time_slots();
     });
 
 });
-    
     

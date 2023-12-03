@@ -7,7 +7,7 @@
 }
 
 .temp a{
-    color: #1E481E;
+    color: black;
     font-weight: 600;
     text-decoration: none;
 }
@@ -25,19 +25,22 @@
 
 /* || RESERVATION CONTAINER */
 .reservation-container {
+    align-items: center;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     width: 100%;
     /* justify-content: center; */
-    padding: 10rem 25%;
+    margin: 7.5rem 0 0 0;
     gap: 2rem;
+}
+
+.reservation-container > *{
+    width: 35%;
 }
 
 /* || RESERVATION */
 .reservation {
     display: flex;
-    width: 100%;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
     border-radius: 10px; /* Add rounded corners */
     margin: auto;
@@ -47,8 +50,8 @@
 .reservation > span {
     background: url("/img/lab-1.jpg") 50% 50% no-repeat;
     background-size: cover;
-    height: 300px;
-    width: 300px;
+    height: 40rem;
+    width: 30rem;
     flex-shrink: 0; /* Don't allow image to shrink */
 }
 
@@ -120,6 +123,33 @@
     background: #1E481E;
 }
 
+.legend{
+    display: flex;
+    font-size: 1.5rem;
+    gap: 1.25rem;
+    justify-content: center;
+}
+
+.legend span{
+    align-items: center;
+    display: flex;
+    border-radius: 50%;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.legend-available{
+    background: lightgray;
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+.legend-reserved{
+    background: #1E481E;
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
 /* || SEATS */
 /*
 .seats-container{
@@ -147,28 +177,7 @@
     background: #1E481E;
 }
 
-.legend{
-    display: flex;
-    gap: 0.5rem;
-}
 
-.legend span{
-    display: inline-block;
-    border-radius: 50%;
-}
-
-.legend-available{
-    border: 1px solid #1E481E;
-    box-sizing: border-box;
-    height: 1rem;
-    width: 1rem;
-}
-
-.legend-reserved{
-    background: #1E481E;
-    height: 1rem;
-    width: 1rem;
-}
 */
 
 /* styles for the drop-down arrow container */

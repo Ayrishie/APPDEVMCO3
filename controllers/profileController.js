@@ -25,7 +25,7 @@ const profileController = {
                 res.render("profile", {
                     title: req.params.email + " - Labify",
                     css: ["profile"],
-                    js: ["profile", "session"],
+                    js: ["profile"],
                     account: {
                         email: req.session.email,
                         isLoggedIn: req.session.isLoggedIn

@@ -9,7 +9,7 @@ const searchController = {
 
         res.render("search", {
             css: ["search"],
-            js: ["search", "session"],
+            js: ["search"],
             buildings: buildings,
             account: {
                 email: req.session.email,
