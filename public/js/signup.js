@@ -19,12 +19,12 @@ $(function(){
                     if (input_field.is($(".input-email")))
                         $(".error-email").text("");
 
-                    return callback_function(true)
+                    return callback_function(true);
                 } else {
                     if (input_field.is($(".input-email")))
                         $(".error-email").text("Email is already registered.");
 
-                    return callback_function(false)
+                    return callback_function(false);
                 }
             });
         }
@@ -32,19 +32,17 @@ $(function(){
 
     function is_valid_password(input_field){
         const password = validator.trim($(".input-password").val());
-        let is_valid_password = false;
 
         if(validator.isLength(password, { min: 8 })) {
-            if (input_field.is($(".input-password"))){
+            if (input_field.is($(".input-password")))
                 $(".error-password").text("");
 
-                is_valid_password = true;
-            }
+            return true;
         } else
             if(input_field.is($(".input-password")))
                 $(".error-password").text("Password must at least be 8 characters.");
 
-        return is_valid_password;
+        return false;
     }
 
     function validate_field(input_field, input_field_name, error_container){
@@ -59,7 +57,7 @@ $(function(){
         const filled = is_filled();
         const valid_password= is_valid_password(input_field);
 
-        is_valid_email(input_field, (valid_email) => {
+        is_valid_email(input_field, function(valid_email){
             if(filled && valid_password && valid_email)
                 $("input[type='submit']").prop("disabled", false);
             else
