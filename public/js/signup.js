@@ -1,58 +1,66 @@
 $(function(){
     function is_filled(){
-        return !(validator.isEmpty(validator.trim($(".input-email").val()))) && !(validator.isEmpty(validator.trim($(".input-password").val())));
+        const email = validator.trim($(".input-email").val());
+        const password = validator.trim($(".input-password").val());
+
+        return !(validator.isEmpty(email)) && !(validator.isEmpty(password));
     }
 
     function is_valid_email(input_field, callback_function){
-        if(!validator.isEmpty(validator.trim($(".input-email").val()))){
+        const email = validator.trim($(".input-email").val());
+
+        if(!validator.isEmpty(email)){
             $.ajax("/checkEmail", {
                 data:{
-                    email: validator.trim($(".input-email").val())
+                    email
                 }
             }).done((data) => {
                 if(data.email !== validator.trim($(".input-email").val())) {
                     if (input_field.is($(".input-email")))
                         $(".error-email").text("");
 
-                    return callback_function(true);
+                    return callback_function(true)
                 } else {
                     if (input_field.is($(".input-email")))
                         $(".error-email").text("Email is already registered.");
 
-                    return callback_function(false);
+                    return callback_function(false)
                 }
             });
         }
     }
 
     function is_valid_password(input_field){
-        if(validator.isLength(validator.trim($(".input-password").val()), {min: 8})) {
+        const password = validator.trim($(".input-password").val());
+        let is_valid_password = false;
+
+        if(validator.isLength(password, { min: 8 })) {
             if (input_field.is($(".input-password"))){
                 $(".error-password").text("");
 
-                return true;
+                is_valid_password = true;
             }
         } else
-            if(input_field.is($(".input-password"))){
+            if(input_field.is($(".input-password")))
                 $(".error-password").text("Password must at least be 8 characters.");
 
-                return false;
-            }
-
-        return false;
+        return is_valid_password;
     }
 
     function validate_field(input_field, input_field_name, error_container){
-        if(validator.isEmpty(validator.trim(input_field.val()))){
+        const empty_field = validator.isEmpty(validator.trim(input_field.val()));
+
+        if(empty_field){
             input_field.prop("value", "");
             error_container.text(input_field_name + " cannot be empty.");
         } else
             error_container.text("");
 
-        const valid_password = is_valid_password(input_field);
+        const filled = is_filled();
+        const valid_password= is_valid_password(input_field);
 
-        is_valid_email(input_field, function(valid_email){
-            if(is_filled() && valid_password && valid_email)
+        is_valid_email(input_field, (valid_email) => {
+            if(filled && valid_password && valid_email)
                 $("input[type='submit']").prop("disabled", false);
             else
                 $("input[type='submit']").prop("disabled", true);

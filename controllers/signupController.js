@@ -61,8 +61,8 @@ const signupController = {
         */
     },
 
-    checkEmail: async function(req, res){
-        const data = await Account.findOne({email: req.query.email});
+    getCheckEmail: async function(req, res){
+        const data = await Account.findOne({email: req.query.email}).select("email").lean();
 
         res.send(data);
     }

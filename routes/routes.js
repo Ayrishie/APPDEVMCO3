@@ -55,6 +55,6 @@ routes.route("/search").get(searchController.getSearch);
 /* Signup */
 routes.route("/signup").get(signupController.getSignup);
 routes.route("/signup").post(validation.signupValidation(), signupController.postSignup);
-routes.route("/checkEmail").get(signupController.checkEmail);
+routes.route("/checkEmail").get(signupController.getCheckEmail);
 
 export default routes;
