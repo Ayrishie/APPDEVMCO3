@@ -1,4 +1,5 @@
 import express from "express";
+import aboutController from "../controllers/aboutController.js";
 import indexController from "../controllers/indexController.js";
 import loginController from "../controllers/loginController.js";
 import logoutController from "../controllers/logoutController.js";
@@ -58,5 +59,8 @@ routes.route("/search").get(searchController.getSearch);
 routes.route("/signup").get(signupController.getSignup);
 routes.route("/signup").post(validation.signupValidation(), signupController.postSignup);
 routes.route("/checkEmail").get(signupController.getCheckEmail);
+
+/* About */
+routes.route("/about").get(aboutController.getAbout);
 
 export default routes;
