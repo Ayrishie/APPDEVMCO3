@@ -17,26 +17,18 @@ $(document).ready(function () {
         function ms_to_12h_time(ms){
             const hours = ms / (60 * 60 * 1000);
             const minutes = (hours % Math.floor(hours)) * 60;
+            const am_pm = hours < 12 ? "AM" : "PM";
 
-            /*
-            (Math.floor(hours) > 12 ? Math.floor(hours) % 12 : Math.floor(hours))
-                => tanggal decimal at gawing 12h version ang 13h to 24h
-
-             (minutes < 10 ? "0" : "")
-                => dagdag zero pag kulang para two digits
-
-            (hours % 12 < 12 ? "AM" : "PM")
-                => pm kung lagpas tanghali (in 12h format) at am kung hindi
-            */
-            return (Math.floor(hours) > 12 ? Math.floor(hours) % 12 : Math.floor(hours)) + ":" + minutes + (minutes < 10 ? "0" : "") + " " + (hours % 12 < 12 ? "AM" : "PM");
+            return (Math.floor(hours) > 12 ? Math.floor(hours) % 12 : Math.floor(hours)) + ":" + minutes + (minutes < 10 ? "0" : "") + " " + am_pm;
         }
 
         function generate_time_slots(){
             // Current time in milliseconds
-            const current_time = new Date().getHours() * 60 * 60 * 1000;
+            let current_time = new Date();
+            current_time = (current_time.getHours() * 60 * 60 * 1000) + (current_time.getMinutes() * 60 * 1000);
 
-            // 07:30 (27000000) to 16:00 (57600000 + 1800000) in milliseconds
-            for(let i = 27000000; i < 57600000; i  +=  1800000){
+            // 07:30 (27000000) to 19:30 (70200000) in milliseconds
+            for(let i = 27000000; i < 70200000; i  +=  1800000){
                 if(current_time > i)
                     continue;
 
@@ -51,7 +43,7 @@ $(document).ready(function () {
         function meron_bang_time_slots(){
             if($(".time-options").children().length === 0){
                 $(".reservation-container").empty();
-                $(".reservation-container").append($("<p>No slots available at this time. Please try again later.</p>"));
+                $(".reservation-container").append($("<p>No slots available at this time. Please try again later during active hours (7:30 AM to 7:30 PM).</p>"));
             }
         }
 
@@ -114,6 +106,21 @@ $(document).ready(function () {
                     } else {
                         if ($(".delete-button").length)
                             $(".delete-button").show();
+
+                        $.ajax({
+                            url: "/reservation/" + $(".building").attr("data-building-id") + "/akinBaTo",
+                            async: false,
+                            data: {
+                                reservedBy: $(this).data("reservedBy")
+                            }
+                        }).done((sagot) => {
+                            if(sagot.result === true){
+                                $(".sapang-temp").empty();
+                                $(".sapang-temp").append($("<button class='edit-button'>Edit</button>"));
+                                $(".sapang-temp").css("display", "flex");
+                            }
+                        });
+
                         $(".reserve-button").prop("disabled", true);
 
                         console.log("Reserved By:", $(this).data("reservedBy"));
@@ -165,10 +172,10 @@ $(document).ready(function () {
                     data: {
                         building: $(".building").text(),
                         reservedBy: selected_seat.data("reservedBy"),
-                        reservationDate: $(".date-options").find(":selected").val(),
-                        reservationTime: $(".time-options").find(":selected").val(),
-                        reservationTimeStart: $(".time-options").find(":selected").data("timeStart"),
-                        reservationTimeEnd: $(".time-options").find(":selected").data("timeEnd"),
+                        reservationDate: selected_seat.data("reservationDate"),
+                        reservationTime: selected_seat.data("reservationTime"),
+                        reservationTimeStart: selected_seat.data("reservationTimeStart"),
+                        reservationTimeEnd: selected_seat.data("reservationTimeEnd"),
                         seatID: selected_seat.data("seatID")
                     },
                     method: "DELETE"
@@ -221,6 +228,50 @@ $(document).ready(function () {
             });
         });
 
+        $(document).on("click", ".edit-button", function(){
+            const edit_button = $(".edit-button");
+
+            if(!edit_button.hasClass("edit-active")) {
+                edit_button.addClass("edit-active");
+                edit_button.text("Save Edits");
+                $(".sapang-temp").append("<p>Select new time slot:</p>")
+
+                const select_wrapper = $("<div class='select-wrapper'></div>");
+                select_wrapper.append($("<span class='dropdown-arrow'></span>"));
+                select_wrapper.append($("<select class='time-options'></select>"));
+                $(".sapang-temp").append(select_wrapper);
+
+                $(".time-options").empty();
+                generate_time_slots();
+            } else{
+                const selected_seat = $(".seats-container").find(".seat-selected");
+
+                $.ajax({
+                    url: "/reservation/" + $(".building").attr("data-building-id") + "/editReservation",
+                    data: {
+                        building: $(".building").text(),
+                        reservedBy: selected_seat.data("reservedBy"),
+                        reservationDate: selected_seat.data("reservationDate"),
+                        reservationTime: selected_seat.data("reservationTime"),
+                        reservationTimeStart: selected_seat.data("reservationTimeStart"),
+                        reservationTimeEnd: selected_seat.data("reservationTimeEnd"),
+                        seatID: selected_seat.data("seatID"),
+                        newReservationTime: $(".sapang-temp .time-options").find(":selected").val(),
+                        newReservationTimeStart: $(".sapang-temp .time-options").find(":selected").data("timeStart"),
+                        newReservationTimeEnd: $(".sapang-temp .time-options").find(":selected").data("timeEnd")
+                    },
+                    method: "POST"
+                }).done(() => {
+                    edit_button.removeClass("edit-active");
+                    $(".sapang-temp").empty();
+                    generate_seats();
+                }).fail(() => {
+                    edit_button.removeClass("edit-active");
+                    $(".sapang-temp").empty();
+                    $(".sapang-temp").append("<p>Edit failed. Please try again.</p>")
+                });
+            }
+        });
 
         // Handle changes in the "Reserve anonymously" checkbox
         $(".reserve-anonymously-checkbox").on("change", function () {
@@ -234,10 +285,22 @@ $(document).ready(function () {
 
         $(".date-options").on("change", function () {
             generate_seats();
+            $(".seat-selected").removeClass("seat-selected");
+            $(".reserve-button").prop("disabled", true);
+            if ($(".delete-button").length)
+                $(".delete-button").hide();
+            $(".temp").empty();
+            $(".sapang-temp").empty();
         });
 
         $(".time-options").on("change", function () {
             generate_seats();
+            $(".seat-selected").removeClass("seat-selected");
+            $(".reserve-button").prop("disabled", true);
+            if ($(".delete-button").length)
+                $(".delete-button").hide();
+            $(".temp").empty();
+            $(".sapang-temp").empty();
         });
 
         generate_dates();

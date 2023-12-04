@@ -117,6 +117,50 @@ postReservation: async function (req, res) {
         } else {
             res.status(403).json({ message: 'Unauthorized' });
         }
+    },
+
+    getAkinBaTo: function(req, res){
+        if((req.query.reservedBy === req.session.email) || req.session.isTechnician)
+            res.send({result: true});
+        else
+            res.send({result: false});
+    },
+
+    postEditReservation: async function(req, res){
+        const {
+            building,
+            reservedBy,
+            reservationDate,
+            reservationTime,
+            reservationTimeStart,
+            reservationTimeEnd,
+            seatID,
+            newReservationTime,
+            newReservationTimeStart,
+            newReservationTimeEnd
+        } = req.body;
+
+        const result = await Reservation.updateOne({
+            building,
+            reservedBy,
+            reservationDate,
+            reservationTime,
+            reservationTimeStart,
+            reservationTimeEnd,
+            seatID,
+        },
+        {
+            reservationTime: newReservationTime,
+            reservationTimeStart: newReservationTimeStart,
+            reservationTimeEnd: newReservationTimeEnd
+        });
+
+        console.log("result: " + result);
+
+        if(result)
+            res.sendStatus(200);
+        else
+            res.sendStatus(422);
     }
 };
 

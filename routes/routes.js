@@ -48,6 +48,8 @@ routes.route("/reservation/:buildingID").get(reservationController.getReservatio
 routes.route("/reservation/:buildingID").post(reservationController.postReservation);
 routes.route("/reservation/:buildingID/getReservations").get(reservationController.getReservations);
 routes.route("/reservation/:buildingID/deleteReservation").delete(reservationController.deleteReservation);
+routes.route("/reservation/:buildingID/akinBaTo").get(reservationController.getAkinBaTo);
+routes.route("/reservation/:buildingID/editReservation").post(reservationController.postEditReservation);
 
 /* Search  */
 routes.route("/search").get(searchController.getSearch);
