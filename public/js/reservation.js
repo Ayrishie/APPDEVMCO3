@@ -22,7 +22,7 @@ $(document).ready(function () {
             return (Math.floor(hours) > 12 ? Math.floor(hours) % 12 : Math.floor(hours)) + ":" + minutes + (minutes < 10 ? "0" : "") + " " + am_pm;
         }
 
-        function generate_time_slots(){
+        function generate_time_slots(parent){
             // Current time in milliseconds
             let current_time = new Date();
             current_time = (current_time.getHours() * 60 * 60 * 1000) + (current_time.getMinutes() * 60 * 1000);
@@ -34,7 +34,7 @@ $(document).ready(function () {
 
                 const interval = $("<option>" + ms_to_12h_time(i) + " – " + ms_to_12h_time(i + 1800000) + "</option>");
 
-                $(".time-options").append(interval);
+                parent.append(interval);
                 interval.data("timeStart", i);
                 interval.data("timeEnd", i + 1800000);
             }
@@ -241,8 +241,7 @@ $(document).ready(function () {
                 select_wrapper.append($("<select class='time-options'></select>"));
                 $(".sapang-temp").append(select_wrapper);
 
-                $(".time-options").empty();
-                generate_time_slots();
+                generate_time_slots($(".sapang-temp .time-options"));
             } else{
                 const selected_seat = $(".seats-container").find(".seat-selected");
 
@@ -263,10 +262,13 @@ $(document).ready(function () {
                     method: "POST"
                 }).done(() => {
                     edit_button.removeClass("edit-active");
+                    $(".temp").empty()
                     $(".sapang-temp").empty();
+                    $(".sapang-temp").hide();
                     generate_seats();
                 }).fail(() => {
                     edit_button.removeClass("edit-active");
+                    $(".temp").empty()
                     $(".sapang-temp").empty();
                     $(".sapang-temp").append("<p>Edit failed. Please try again.</p>")
                 });
@@ -304,7 +306,7 @@ $(document).ready(function () {
         });
 
         generate_dates();
-        generate_time_slots();
+        generate_time_slots($(".reservation .time-options"));
         generate_seats();
         meron_bang_time_slots();
     });
